@@ -7,6 +7,11 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    background: ${props => props.theme.background};
+    -webkit-font-smoothing: antialiased;
+  }
+
   body, input, textarea, button {
     font: 400 1rem 'Roboto', sans-serif;
   }
