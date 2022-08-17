@@ -6,4 +6,8 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  body, input, textarea, button {
+    font: 400 1rem 'Roboto', sans-serif;
+  }
 `
