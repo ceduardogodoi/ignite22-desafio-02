@@ -16,6 +16,10 @@ export const GlobalStyle = createGlobalStyle`
     font: 400 1rem 'Roboto', sans-serif;
   }
 
+  ul {
+    list-style: none;
+  }
+
   button {
     cursor: pointer;
 
