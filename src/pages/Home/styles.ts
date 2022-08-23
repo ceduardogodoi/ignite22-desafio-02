@@ -126,11 +126,11 @@ export const CoffeeTypeTag = styled.span`
   text-transform: uppercase;
 `
 
-export const ActionsContainer = styled.div`
+export const PricingContainer = styled.div`
   display: flex;
 `
 
-export const PriceContainer = styled.div`
+export const Price = styled.div`
   margin-right: 1.438rem;
 
   & > span {
@@ -141,6 +141,11 @@ export const PriceContainer = styled.div`
   & > strong {
     font: 800 1.5rem/31px 'Baloo 2', cursive;
   }
+`
+
+export const ActionsContainer = styled.div`
+  display: flex;
+  column-gap: 0.5rem;
 `
 
 export const ShoppingCartButton = styled.button`

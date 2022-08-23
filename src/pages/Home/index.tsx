@@ -1,7 +1,19 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { QuantityCounter } from '../../components/Counter'
 import coffeeCup from '../../assets/images/coffee-cup.png'
 import espresso from '../../assets/images/coffe-types/espresso.png'
-import { ActionsContainer, Bullet, CoffeeCard, CoffeeListContainer, CoffeeTypeTag, ContentContainer, IntroContainer, PriceContainer, ShoppingCartButton } from './styles'
+import {
+  PricingContainer,
+  Bullet,
+  CoffeeCard,
+  CoffeeListContainer,
+  CoffeeTypeTag,
+  ContentContainer,
+  IntroContainer,
+  Price,
+  ShoppingCartButton,
+  ActionsContainer
+} from './styles'
 
 export function Home() {
   return (
@@ -61,22 +73,20 @@ export function Home() {
               <strong>Expresso Tradicional</strong>
               <p>O tradicional café feito com água quente e grãos moídos</p>
 
-              <ActionsContainer>
-                <PriceContainer>
+              <PricingContainer>
+                <Price>
                   <span>R$</span>
                   <strong>9,90</strong>
-                </PriceContainer>
+                </Price>
 
-                {/* <div>
-                  <button>-</button>
-                  <input type="number" defaultValue={1} />
-                  <button>+</button>
-                </div> */}
+                <ActionsContainer>
+                  <QuantityCounter />
 
-                <ShoppingCartButton title="Adicionar ao carrinho">
-                  <ShoppingCart weight="fill" />
-                </ShoppingCartButton>
-              </ActionsContainer>
+                  <ShoppingCartButton title="Adicionar ao carrinho">
+                    <ShoppingCart weight="fill" />
+                  </ShoppingCartButton>
+                </ActionsContainer>
+              </PricingContainer>
             </CoffeeCard>
           ))}
         </ul>
