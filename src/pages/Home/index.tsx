@@ -2,9 +2,9 @@ import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { QuantityCounter } from '../../components/Counter'
 import coffeeCup from '../../assets/images/coffee-cup.png'
 import espresso from '../../assets/images/coffe-types/espresso.png'
+import { Bullet } from '../../components/Bullet'
 import {
   PricingContainer,
-  Bullet,
   CoffeeCard,
   CoffeeListContainer,
   CoffeeTypeTag,
