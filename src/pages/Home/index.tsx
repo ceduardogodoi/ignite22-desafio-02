@@ -1,8 +1,9 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { QuantityCounter } from '../../components/Counter'
 import coffeeCup from '../../assets/images/coffee-cup.png'
-import espresso from '../../assets/images/coffe-types/espresso.png'
 import { Bullet } from '../../components/Bullet'
+import { priceFormatter } from '../../utils/formatter'
+import { coffees } from '../../data'
 import {
   PricingContainer,
   CoffeeCard,
@@ -62,21 +63,21 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <ul>
-          {new Array(5).fill(1).map(num => (
-            <CoffeeCard key={num}>
-              <img src={espresso} alt="" />
+          {coffees.map(coffee => (
+            <CoffeeCard key={coffee.id}>
+              <img src={coffee.image} alt="" />
               <div>
-                <CoffeeTypeTag>Especial</CoffeeTypeTag>
-                <CoffeeTypeTag>Alcoólico</CoffeeTypeTag>
-                <CoffeeTypeTag>Gelado</CoffeeTypeTag>
+                {coffee.tags.map(tag => (
+                  <CoffeeTypeTag key={tag}>{tag}</CoffeeTypeTag>
+                ))}
               </div>
-              <strong>Expresso Tradicional</strong>
-              <p>O tradicional café feito com água quente e grãos moídos</p>
+              <strong>{coffee.title}</strong>
+              <p>{coffee.description}</p>
 
               <PricingContainer>
                 <Price>
                   <span>R$</span>
-                  <strong>9,90</strong>
+                  <strong>{priceFormatter.format(coffee.price)}</strong>
                 </Price>
 
                 <ActionsContainer>
