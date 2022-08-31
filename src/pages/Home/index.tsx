@@ -1,9 +1,12 @@
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+
+import { useContext } from 'react'
+import { Coffee as CoffeeIcon, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { QuantityCounter } from '../../components/Counter'
-import coffeeCup from '../../assets/images/coffee-cup.png'
 import { Bullet } from '../../components/Bullet'
+import { CartContext, Coffee } from '../../contexts/CartContext'
 import { priceFormatter } from '../../utils/formatter'
 import { coffees } from '../../data'
+import coffeeCup from '../../assets/images/coffee-cup.png'
 import {
   PricingContainer,
   CoffeeCard,
@@ -17,6 +20,12 @@ import {
 } from './styles'
 
 export function Home() {
+  const { addCoffeeToCart } = useContext(CartContext)
+
+  function handleAddCoffeeToCart(coffee: Coffee) {
+    addCoffeeToCart(coffee)
+  }
+
   return (
     <>
       <IntroContainer>
@@ -46,7 +55,7 @@ export function Home() {
               </li>
               <li>
                 <Bullet color="purple">
-                  <Coffee weight="fill" />
+                  <CoffeeIcon weight="fill" />
                 </Bullet>
                 <span>O café chega fresquinho até você</span>
               </li>
@@ -83,7 +92,10 @@ export function Home() {
                 <ActionsContainer>
                   <QuantityCounter />
 
-                  <ShoppingCartButton title="Adicionar ao carrinho">
+                  <ShoppingCartButton
+                    title="Adicionar ao carrinho"
+                    onClick={() => handleAddCoffeeToCart(coffee)}
+                  >
                     <ShoppingCart weight="fill" />
                   </ShoppingCartButton>
                 </ActionsContainer>

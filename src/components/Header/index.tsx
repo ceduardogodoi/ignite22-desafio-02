@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
 import { ShoppingCartButton, HeaderContainer, LocationButton } from './styles'
+import { CartContext } from '../../contexts/CartContext'
 
 export function Header() {
+  const { totalItems } = useContext(CartContext)
+
   return (
     <HeaderContainer>
       <nav>
@@ -18,9 +22,11 @@ export function Header() {
           <span>Porto Alegre, RS</span>
         </LocationButton>
         <ShoppingCartButton title="Ir para o Carrinho">
-          {/* <div>
-            <span>3</span>
-          </div> */}
+          {totalItems > 0 && (
+            <div>
+              <span>{totalItems}</span>
+            </div>
+          )}
           <ShoppingCart size={22} weight="fill" />
         </ShoppingCartButton>
       </div>
