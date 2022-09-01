@@ -40,7 +40,12 @@ export function CartContextProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <CartContext.Provider value={{ items, totalItems, totalPrice, addCoffeeToCart }}>
+    <CartContext.Provider value={{
+      items,
+      totalItems,
+      totalPrice,
+      addCoffeeToCart
+    }}>
       {children}
     </CartContext.Provider>
   )
