@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Minus, Plus } from 'phosphor-react'
-import { CounterContainer } from './styles'
+import { QuantityContainer } from './styles'
 
 export function QuantityCounter() {
   const [quantity, setQuantity] = useState(1)
@@ -18,7 +18,7 @@ export function QuantityCounter() {
   }
 
   return (
-    <CounterContainer>
+    <QuantityContainer>
       <button disabled={isDisabled} onClick={handleDecrement}>
         <Minus size={14} weight="fill" color="#8047f8" />
       </button>
@@ -26,6 +26,6 @@ export function QuantityCounter() {
       <button onClick={handleIncrement}>
         <Plus size={14} weight="fill" color="#8047f8" />
       </button>
-    </CounterContainer>
+    </QuantityContainer>
   )
 }

@@ -1,6 +1,6 @@
 import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money, Trash } from 'phosphor-react'
 import espresso from '../../assets/images/coffe-types/espresso.png'
-import { QuantityCounter } from '../../components/Counter'
+import { QuantityCounter } from '../../components/QuantityCounter'
 import {
   AddressLine1,
   AddressLine2,

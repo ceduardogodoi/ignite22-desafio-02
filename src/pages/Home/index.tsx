@@ -1,7 +1,7 @@
 
 import { useContext } from 'react'
 import { Coffee as CoffeeIcon, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { QuantityCounter } from '../../components/Counter'
+import { QuantityCounter } from '../../components/QuantityCounter'
 import { Bullet } from '../../components/Bullet'
 import { CartContext, Coffee } from '../../contexts/CartContext'
 import { priceFormatter } from '../../utils/formatter'

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CounterContainer = styled.div`
+export const QuantityContainer = styled.div`
   background: ${props => props.theme['base-button']};
   border-radius: 6px;
   
