@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Coffee as CoffeeIcon, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { QuantityCounter } from '../../components/QuantityCounter'
 import { Bullet } from '../../components/Bullet'
-import { CartContext, Coffee } from '../../contexts/CartContext'
+import { CartContext, Item } from '../../contexts/CartContext'
 import { priceFormatter } from '../../utils/formatter'
 import { coffees } from '../../data'
 import coffeeCup from '../../assets/images/coffee-cup.png'
@@ -22,7 +22,7 @@ import {
 export function Home() {
   const { addCoffeeToCart } = useContext(CartContext)
 
-  function handleAddCoffeeToCart(coffee: Coffee) {
+  function handleAddCoffeeToCart(coffee: Item) {
     addCoffeeToCart(coffee)
   }
 
@@ -90,7 +90,7 @@ export function Home() {
                 </Price>
 
                 <ActionsContainer>
-                  <QuantityCounter />
+                  <QuantityCounter item={coffee} />
 
                   <ShoppingCartButton
                     title="Adicionar ao carrinho"

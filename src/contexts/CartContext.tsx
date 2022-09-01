@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from 'react'
+import { createContext, useState, PropsWithChildren } from 'react'
 
 export enum Tag {
   TRADITIONAL = 'Tradicional',
@@ -8,26 +8,27 @@ export enum Tag {
   ESPECIAL = 'Especial'
 }
 
-export interface Coffee {
+export interface Item {
   id: number,
   price: number,
   title: string,
   description: string,
   tags: Tag[],
-  image: string
+  image: string,
+  quantity?: number
 }
 
 interface CartContextType {
-  items: Coffee[],
+  items: Item[],
   totalItems: number,
   totalPrice: number,
-  addCoffeeToCart(coffee: Coffee): void
+  addCoffeeToCart(coffee: Item): void
 }
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: PropsWithChildren) {
-  const [items, setItems] = useState([] as Coffee[])
+  const [items, setItems] = useState<Item[]>([])
 
   const totalItems = items.length
   const totalPrice = items.reduce((accumulator, currentItem) => {
@@ -35,7 +36,7 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     return accumulator
   }, 0)
 
-  function addCoffeeToCart(coffee: Coffee) {
+  function addCoffeeToCart(coffee: Item) {
     setItems(currentItems => [...currentItems, coffee])
   }
 

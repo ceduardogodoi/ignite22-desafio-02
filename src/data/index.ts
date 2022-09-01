@@ -1,4 +1,4 @@
-import { Coffee, Tag } from '../contexts/CartContext'
+import { Tag } from '../contexts/CartContext'
 import american from '../assets/images/coffe-types/american.png'
 import creamyEspresso from '../assets/images/coffe-types/creamy-espresso.png'
 import icedCoffee from '../assets/images/coffe-types/iced-coffee.png'
@@ -11,6 +11,15 @@ import cuban from '../assets/images/coffe-types/cuban.png'
 import hawaiian from '../assets/images/coffe-types/hawaiian.png'
 import arabic from '../assets/images/coffe-types/arabic.png'
 import irish from '../assets/images/coffe-types/irish.png'
+
+interface Coffee {
+  id: number,
+  price: number,
+  title: string,
+  description: string,
+  tags: Tag[],
+  image: string,
+}
 
 export const coffees: Coffee[] = [
   {
