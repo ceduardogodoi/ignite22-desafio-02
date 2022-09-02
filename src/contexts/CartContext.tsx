@@ -15,7 +15,7 @@ export interface Item {
   description: string,
   tags: Tag[],
   image: string,
-  quantity: number
+  quantity?: number
 }
 
 interface CartContextType {
@@ -31,6 +31,10 @@ export function CartContextProvider({ children }: PropsWithChildren) {
   const [items, setItems] = useState<Item[]>([])
 
   const { total, quantity } = items.reduce((accumulator, currentItem) => {
+    if (!currentItem.quantity) {
+      currentItem.quantity = 1
+    }
+
     accumulator.quantity += currentItem.quantity
     accumulator.total += currentItem.quantity * currentItem.price
     return accumulator
@@ -39,12 +43,7 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     quantity: 0
   })
 
-  console.log(total)
-
   function addCoffeeToCart(coffee: Item) {
-    if (!coffee.quantity) {
-      coffee.quantity = 1
-    }
     setItems(currentItems => [...currentItems, coffee])
   }
 
