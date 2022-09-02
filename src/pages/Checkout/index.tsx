@@ -1,6 +1,15 @@
-import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money, Trash } from 'phosphor-react'
-import espresso from '../../assets/images/coffe-types/espresso.png'
+import { useContext } from 'react'
+import {
+  MapPinLine,
+  CurrencyDollar,
+  CreditCard,
+  Bank,
+  Money,
+  Trash
+} from 'phosphor-react'
 import { QuantityCounter } from '../../components/QuantityCounter'
+import { CartContext } from '../../contexts/CartContext'
+import { priceFormatter } from '../../utils/formatter'
 import {
   AddressLine1,
   AddressLine2,
@@ -20,6 +29,8 @@ import {
 
 
 export function Checkout() {
+  const { items, totalItems, shippingPrice } = useContext(CartContext)
+
   return (
     <MainContainer>
       <OrderSection>
@@ -84,16 +95,16 @@ export function Checkout() {
 
         <SelectedCoffeesCard>
           <ul>
-            {new Array(2).fill(1).map(item => (
-              <CoffeeListItem key={item}>
+            {items.map(item => (
+              <CoffeeListItem key={item.id}>
                 <div>
-                  <img width={64} src={espresso} alt="" />
+                  <img width={64} src={item.image} alt="" />
                 </div>
 
                 <ActionsContainer>
-                  <span>Expresso Tradicional</span>
+                  <span>{item.title}</span>
                   <Actions>
-                    <QuantityCounter />
+                    <QuantityCounter item={item} />
                     <RemoveButton>
                       <Trash size={16} color="#8047F8" />
                       <span>Remover</span>
@@ -101,7 +112,7 @@ export function Checkout() {
                   </Actions>
                 </ActionsContainer>
 
-                <strong>R$ 9,90</strong>
+                <strong>{priceFormatter.format((item.quantity ?? 1) * item.price)}</strong>
               </CoffeeListItem>
             ))}
           </ul>
@@ -109,17 +120,17 @@ export function Checkout() {
           <Summary>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>{priceFormatter.format(totalItems)}</span>
             </div>
 
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>{priceFormatter.format(shippingPrice)}</span>
             </div>
 
             <div>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>{priceFormatter.format(totalItems + shippingPrice)}</strong>
             </div>
           </Summary>
 

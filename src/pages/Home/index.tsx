@@ -4,7 +4,7 @@ import { Coffee as CoffeeIcon, Package, ShoppingCart, Timer } from 'phosphor-rea
 import { QuantityCounter } from '../../components/QuantityCounter'
 import { Bullet } from '../../components/Bullet'
 import { CartContext, Item } from '../../contexts/CartContext'
-import { priceFormatter } from '../../utils/formatter'
+import { numberFormatter } from '../../utils/formatter'
 import { coffees } from '../../data'
 import coffeeCup from '../../assets/images/coffee-cup.png'
 import {
@@ -86,7 +86,7 @@ export function Home() {
               <PricingContainer>
                 <Price>
                   <span>R$</span>
-                  <strong>{priceFormatter.format(coffee.price)}</strong>
+                  <strong>{numberFormatter.format(coffee.price)}</strong>
                 </Price>
 
                 <ActionsContainer>

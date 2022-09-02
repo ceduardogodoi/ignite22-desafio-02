@@ -8,7 +8,7 @@ interface QuantityCounterProps {
 }
 
 export function QuantityCounter({ item }: QuantityCounterProps) {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(() => item.quantity ? item.quantity : 1)
 
   const isDisabled = quantity < 2
 
