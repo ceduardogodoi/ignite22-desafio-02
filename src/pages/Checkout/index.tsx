@@ -108,7 +108,7 @@ export function Checkout() {
                 <ActionsContainer>
                   <span>{item.title}</span>
                   <Actions>
-                    <QuantityCounter item={item} />
+                    <QuantityCounter item={item} canChangeQuantityOnCart />
                     <RemoveButton onClick={() => handleRemoveItem(item.id)}>
                       <Trash size={16} color="#8047F8" />
                       <span>Remover</span>

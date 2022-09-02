@@ -1,34 +1,37 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Minus, Plus } from 'phosphor-react'
-import { Item } from '../../contexts/CartContext'
+import { CartContext, Item } from '../../contexts/CartContext'
 import { QuantityContainer } from './styles'
 
 interface QuantityCounterProps {
-  item: Item
+  item: Item,
+  canChangeQuantityOnCart?: boolean
 }
 
-export function QuantityCounter({ item }: QuantityCounterProps) {
+export function QuantityCounter({ item, canChangeQuantityOnCart = false }: QuantityCounterProps) {
+  const { updateItemQuantityOnCart } = useContext(CartContext)
+
   const [quantity, setQuantity] = useState(() => item.quantity ? item.quantity : 1)
 
   const isDisabled = quantity < 2
 
   function handleIncrement() {
-    setQuantity(currentQuantity => {
-      const newQuantity = currentQuantity + 1
+    const newQuantity = quantity + 1
 
-      item.quantity = newQuantity
-      return newQuantity
-    })
+    item.quantity = newQuantity
+    setQuantity(newQuantity)
+    if (canChangeQuantityOnCart) {
+      updateItemQuantityOnCart(item.id, newQuantity)
+    }
   }
 
   function handleDecrement() {
-    if (quantity > 1) {
-      setQuantity(currentQuantity => {
-        const newQuantity = currentQuantity - 1
+    const newQuantity = quantity - 1
 
-        item.quantity = newQuantity
-        return newQuantity
-      })
+    item.quantity = newQuantity
+    setQuantity(newQuantity)
+    if (canChangeQuantityOnCart) {
+      updateItemQuantityOnCart(item.id, newQuantity)
     }
   }
 

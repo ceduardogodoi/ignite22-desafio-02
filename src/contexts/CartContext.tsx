@@ -24,7 +24,8 @@ interface CartContextType {
   totalItems: number,
   shippingPrice: number,
   addItemToCart(coffee: Item): void,
-  removeItemFromCart(itemId: number): void
+  removeItemFromCart(itemId: number): void,
+  updateItemQuantityOnCart(itemId: number, newQuantity: number): void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -50,7 +51,17 @@ export function CartContextProvider({ children }: PropsWithChildren) {
   }
 
   function removeItemFromCart(itemId: number) {
-    setItems(items => items.filter(item => item.id !== itemId))
+    setItems(currentItems => currentItems.filter(item => item.id !== itemId))
+  }
+
+  function updateItemQuantityOnCart(itemId: number, newQuantity: number) {
+    setItems(currentItems => currentItems.map(item => {
+      if (item.id === itemId) {
+        item.quantity = newQuantity
+      }
+
+      return item
+    }))
   }
 
   return (
@@ -60,7 +71,8 @@ export function CartContextProvider({ children }: PropsWithChildren) {
       totalItems,
       shippingPrice: 3.5,
       addItemToCart,
-      removeItemFromCart
+      removeItemFromCart,
+      updateItemQuantityOnCart
     }}>
       {children}
     </CartContext.Provider>
