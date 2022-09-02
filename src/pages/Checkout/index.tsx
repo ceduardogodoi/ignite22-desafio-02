@@ -29,7 +29,11 @@ import {
 
 
 export function Checkout() {
-  const { items, totalItems, shippingPrice } = useContext(CartContext)
+  const { items, totalItems, shippingPrice, removeItemFromCart } = useContext(CartContext)
+
+  function handleRemoveItem(itemId: number) {
+    removeItemFromCart(itemId)
+  }
 
   return (
     <MainContainer>
@@ -105,7 +109,7 @@ export function Checkout() {
                   <span>{item.title}</span>
                   <Actions>
                     <QuantityCounter item={item} />
-                    <RemoveButton>
+                    <RemoveButton onClick={() => handleRemoveItem(item.id)}>
                       <Trash size={16} color="#8047F8" />
                       <span>Remover</span>
                     </RemoveButton>

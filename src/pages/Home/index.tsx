@@ -20,10 +20,10 @@ import {
 } from './styles'
 
 export function Home() {
-  const { addCoffeeToCart } = useContext(CartContext)
+  const { addItemToCart } = useContext(CartContext)
 
   function handleAddCoffeeToCart(coffee: Item) {
-    addCoffeeToCart(coffee)
+    addItemToCart(coffee)
   }
 
   return (
