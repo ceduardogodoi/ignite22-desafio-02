@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
@@ -37,7 +38,16 @@ export const LocationButton = styled(BaseButton)`
   }
 `
 
-export const ShoppingCartButton = styled(BaseButton)`
+export const ShoppingCartLink = styled(Link)`
+  max-height: 38px;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 6px;
+  line-height: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   max-width: 38px;
   background: ${props => props.theme['yellow-light']};
