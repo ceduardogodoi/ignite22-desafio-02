@@ -1,4 +1,5 @@
 import { Tag } from '../contexts/CartContext'
+import espresso from '../assets/images/coffe-types/espresso.png'
 import american from '../assets/images/coffe-types/american.png'
 import creamyEspresso from '../assets/images/coffe-types/creamy-espresso.png'
 import icedCoffee from '../assets/images/coffe-types/iced-coffee.png'
@@ -28,7 +29,7 @@ export const coffees: Coffee[] = [
     description: 'O tradicional café feito com água quente e grãos moídos.',
     price: 9.90,
     tags: [Tag.TRADITIONAL],
-    image: american
+    image: espresso
   },
   {
     id: 2,

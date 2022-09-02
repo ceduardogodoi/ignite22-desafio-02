@@ -6,7 +6,7 @@ import { ShoppingCartButton, HeaderContainer, LocationButton } from './styles'
 import { CartContext } from '../../contexts/CartContext'
 
 export function Header() {
-  const { totalItems } = useContext(CartContext)
+  const { quantity } = useContext(CartContext)
 
   return (
     <HeaderContainer>
@@ -22,9 +22,9 @@ export function Header() {
           <span>Porto Alegre, RS</span>
         </LocationButton>
         <ShoppingCartButton title="Ir para o Carrinho">
-          {totalItems > 0 && (
+          {quantity > 0 && (
             <div>
-              <span>{totalItems}</span>
+              <span>{quantity}</span>
             </div>
           )}
           <ShoppingCart size={22} weight="fill" />
