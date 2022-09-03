@@ -64,15 +64,19 @@ export const AddressLine1 = styled.div`
   column-gap: 0.75rem;
 
   & > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
 
     &::after {
       position: absolute;
       content: 'Opcional';
       color: ${props => props.theme['base-label']};
-      font-size: 12px;
+      font-size: 0.75rem;
       font-style: italic;
-      transform: translate(calc(-100% - 12px), 100%);
+      margin-right: 0.75rem;
     }
   }
 `
