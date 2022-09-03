@@ -57,7 +57,9 @@ export function Checkout() {
 
             <AddressLine1>
               <TextInput type="text" placeholder="Número" />
-              <TextInput type="text" placeholder="Complemento" />
+              <div>
+                <TextInput type="text" placeholder="Complemento" />
+              </div>
             </AddressLine1>
 
             <AddressLine2>

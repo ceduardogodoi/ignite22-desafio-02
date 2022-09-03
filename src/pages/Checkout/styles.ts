@@ -39,8 +39,8 @@ export const Card = styled.div`
     gap: 1rem 0.75rem;
 
     & [placeholder="CEP"],
-        [placeholder="Número"],
-        [placeholder="Bairro"] {
+      [placeholder="Número"],
+      [placeholder="Bairro"] {
       max-width: 12.5rem;
     }
 
@@ -62,6 +62,19 @@ export const Card = styled.div`
 export const AddressLine1 = styled.div`
   display: flex;
   column-gap: 0.75rem;
+
+  & > div {
+    width: 100%;
+
+    &::after {
+      position: absolute;
+      content: 'Opcional';
+      color: ${props => props.theme['base-label']};
+      font-size: 12px;
+      font-style: italic;
+      transform: translate(calc(-100% - 12px), 100%);
+    }
+  }
 `
 
 export const AddressLine2 = styled.div`
