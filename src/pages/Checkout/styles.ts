@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 export const MainContainer = styled.main`
@@ -156,6 +157,8 @@ export const SelectedCoffeesCard = styled.div`
   padding: 2.5rem;
   background: ${props => props.theme['base-card']};
   border-radius: 6px 44px;
+  display: flex;
+  flex-direction: column;
 `
 
 export const RemoveButton = styled.button`
@@ -241,7 +244,7 @@ export const Summary = styled.div`
 
 `
 
-export const PlaceOrderButton = styled.button`
+export const PlaceOrderButton = styled(Link)`
   width: 100%;
   min-height: 2.875rem;
   padding: 0.75rem;
@@ -250,8 +253,12 @@ export const PlaceOrderButton = styled.button`
   background: ${props => props.theme.yellow};
   color: ${props => props.theme.white};
   text-transform: uppercase;
+  text-decoration: none;
   font-size: 0.875rem;
   font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background: ${props => props.theme['yellow-dark']};

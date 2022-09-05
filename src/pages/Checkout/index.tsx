@@ -155,7 +155,7 @@ export function Checkout() {
             </div>
           </Summary>
 
-          <PlaceOrderButton>Confirmar pedido</PlaceOrderButton>
+          <PlaceOrderButton to="/success">Confirmar pedido</PlaceOrderButton>
         </SelectedCoffeesCard>
       </OrderSection>
     </MainContainer>
