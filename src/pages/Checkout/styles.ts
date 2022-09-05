@@ -73,10 +73,11 @@ export const AddressLine1 = styled.div`
     &::after {
       position: absolute;
       content: 'Opcional';
+      background: ${props => props.theme['base-input']};
       color: ${props => props.theme['base-label']};
       font-size: 0.75rem;
       font-style: italic;
-      margin-right: 0.75rem;
+      padding: 0 0.75rem;
     }
   }
 `
