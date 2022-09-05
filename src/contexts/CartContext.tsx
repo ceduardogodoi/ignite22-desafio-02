@@ -1,4 +1,5 @@
 import { createContext, useState, PropsWithChildren } from 'react'
+import { Bank, CreditCard, Money } from 'phosphor-react'
 
 export enum Tag {
   TRADITIONAL = 'Tradicional',
@@ -18,20 +19,60 @@ export interface Item {
   quantity?: number
 }
 
+interface Address {
+  postalCode: string,
+  street: string,
+  number: string,
+  line1?: string,
+  neighborhood: string,
+  city: string,
+  state: string
+}
+
+export enum PaymentMethod {
+  CREDIT_CARD = 'credit',
+  DEBIT_CARD = 'debit',
+  CASH = 'cash'
+}
+
+export const paymentMethods = [
+  {
+    label: 'Cartão de Crédito',
+    value: PaymentMethod.CREDIT_CARD,
+    Icon: () => <CreditCard size={16} color="#8047F8" />
+  },
+  {
+    label: 'Cartão de Débito',
+    value: PaymentMethod.DEBIT_CARD,
+    Icon: () => <Bank size={16} color="#8047F8" />
+  },
+  {
+    label: 'Dinheiro',
+    value: PaymentMethod.CASH,
+    Icon: () => <Money size={16} color="#8047F8" />
+  }
+] as const
+
 interface CartContextType {
   items: Item[],
   quantity: number,
   totalItems: number,
   shippingPrice: number,
+  shippingAddress: Address,
+  paymentMethod?: PaymentMethod
   addItemToCart(coffee: Item): void,
   removeItemFromCart(itemId: number): void,
-  updateItemQuantityOnCart(itemId: number, newQuantity: number): void
+  updateItemQuantityOnCart(itemId: number, newQuantity: number): void,
+  addShippingAddress(address: Address): void,
+  addPaymentMethod(paymentMethod: PaymentMethod): void
 }
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: PropsWithChildren) {
   const [items, setItems] = useState<Item[]>([])
+  const [shippingAddress, setShippingAddress] = useState({} as Address)
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>()
 
   const { totalItems, quantity } = items.reduce((accumulator, currentItem) => {
     if (!currentItem.quantity) {
@@ -64,15 +105,27 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     }))
   }
 
+  function addShippingAddress(address: Address) {
+    setShippingAddress(address)
+  }
+
+  function addPaymentMethod(paymentMethod: PaymentMethod) {
+    setPaymentMethod(paymentMethod)
+  }
+
   return (
     <CartContext.Provider value={{
       items,
       quantity,
       totalItems,
       shippingPrice: 3.5,
+      shippingAddress,
+      paymentMethod,
       addItemToCart,
       removeItemFromCart,
-      updateItemQuantityOnCart
+      updateItemQuantityOnCart,
+      addShippingAddress,
+      addPaymentMethod
     }}>
       {children}
     </CartContext.Provider>

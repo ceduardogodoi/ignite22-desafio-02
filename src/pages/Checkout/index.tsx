@@ -1,14 +1,11 @@
-import { useContext } from 'react'
+import { useContext, ChangeEvent } from 'react'
 import {
   MapPinLine,
   CurrencyDollar,
-  CreditCard,
-  Bank,
-  Money,
   Trash
 } from 'phosphor-react'
 import { QuantityCounter } from '../../components/QuantityCounter'
-import { CartContext } from '../../contexts/CartContext'
+import { CartContext, PaymentMethod, paymentMethods } from '../../contexts/CartContext'
 import { priceFormatter } from '../../utils/formatter'
 import {
   AddressLine1,
@@ -29,10 +26,30 @@ import {
 
 
 export function Checkout() {
-  const { items, totalItems, shippingPrice, removeItemFromCart } = useContext(CartContext)
+  const {
+    items,
+    totalItems,
+    shippingPrice,
+    shippingAddress,
+    paymentMethod,
+    removeItemFromCart,
+    addShippingAddress,
+    addPaymentMethod
+  } = useContext(CartContext)
+
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    addShippingAddress({
+      ...shippingAddress,
+      [event.target.name]: event.target.value
+    })
+  }
 
   function handleRemoveItem(itemId: number) {
     removeItemFromCart(itemId)
+  }
+
+  function handlePaymentMethodClick(paymentMethod: PaymentMethod) {
+    addPaymentMethod(paymentMethod)
   }
 
   return (
@@ -52,20 +69,20 @@ export function Checkout() {
           </header>
 
           <form>
-            <TextInput type="text" placeholder="CEP" maxLength={8} />
-            <TextInput type="text" placeholder="Rua" />
+            <TextInput name="postalCode" type="text" placeholder="CEP" maxLength={8} onChange={handleInputChange} />
+            <TextInput name="street" type="text" placeholder="Rua" onChange={handleInputChange} />
 
             <AddressLine1>
-              <TextInput type="text" placeholder="Número" />
+              <TextInput name="number" type="text" placeholder="Número" onChange={handleInputChange} />
               <div>
-                <TextInput type="text" placeholder="Complemento" />
+                <TextInput name="line1" type="text" placeholder="Complemento" onChange={handleInputChange} />
               </div>
             </AddressLine1>
 
             <AddressLine2>
-              <TextInput type="text" placeholder="Bairro" />
-              <TextInput type="text" placeholder="Cidade" />
-              <TextInput type="text" placeholder="UF" maxLength={2} />
+              <TextInput name="neighborhood" type="text" placeholder="Bairro" onChange={handleInputChange} />
+              <TextInput name="city" type="text" placeholder="Cidade" onChange={handleInputChange} />
+              <TextInput name="state" type="text" placeholder="UF" maxLength={2} onChange={handleInputChange} />
             </AddressLine2>
           </form>
         </Card>
@@ -81,18 +98,16 @@ export function Checkout() {
             </div>
           </header>
 
-          <PaymentTypeButton selected>
-            <CreditCard size={16} color="#8047F8" />
-            <span>Cartão de Crédito</span>
-          </PaymentTypeButton>
-          <PaymentTypeButton>
-            <Bank size={16} color="#8047F8" />
-            <span>Cartão de Débito</span>
-          </PaymentTypeButton>
-          <PaymentTypeButton>
-            <Money size={16} color="#8047F8" />
-            <span>Dinheiro</span>
-          </PaymentTypeButton>
+          {paymentMethods.map(currentPaymentMethod => (
+            <PaymentTypeButton
+              key={currentPaymentMethod.value}
+              onClick={() => handlePaymentMethodClick(currentPaymentMethod.value)}
+              selected={currentPaymentMethod.value === paymentMethod}
+            >
+              <currentPaymentMethod.Icon />
+              <span>{currentPaymentMethod.label}</span>
+            </PaymentTypeButton>
+          ))}
         </Card>
       </OrderSection>
 
