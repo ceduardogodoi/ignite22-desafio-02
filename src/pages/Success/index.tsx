@@ -2,8 +2,18 @@ import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { ContentCard, ContentContainer, MainContainer } from './styles'
 import illustration from '../../assets/images/illustration.png'
 import { Bullet } from '../../components/Bullet'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+
+const payment = {
+  credit: 'Cartão de Crédito',
+  debit: 'Cartão de Débito',
+  cash: 'Dinheiro'
+} as const
 
 export function Success() {
+  const { shippingAddress, paymentMethod } = useContext(CartContext)
+
   return (
     <MainContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -17,9 +27,9 @@ export function Success() {
                 <MapPin size={16} weight="fill" />
               </Bullet>
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em <strong>{shippingAddress.street}, {shippingAddress.number}</strong>
                 <br />
-                Farrapos - Porto Alegre, RS
+                {shippingAddress.neighborhood} - {shippingAddress.city}, {shippingAddress.state}
               </p>
             </li>
             <li>
@@ -39,7 +49,7 @@ export function Success() {
               <p>
                 Pagamento na entrega
                 <br />
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethod ? payment[paymentMethod] : 'Erro'}</strong>
               </p>
             </li>
           </ul>
