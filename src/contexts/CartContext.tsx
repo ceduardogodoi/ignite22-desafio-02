@@ -64,7 +64,8 @@ interface CartContextType {
   removeItemFromCart(itemId: number): void,
   updateItemQuantityOnCart(itemId: number, newQuantity: number): void,
   addShippingAddress(address: Address): void,
-  addPaymentMethod(paymentMethod: PaymentMethod): void
+  addPaymentMethod(paymentMethod: PaymentMethod): void,
+  resetItems(): void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -113,6 +114,10 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     setPaymentMethod(paymentMethod)
   }
 
+  function resetItems() {
+    setItems([])
+  }
+
   return (
     <CartContext.Provider value={{
       items,
@@ -125,7 +130,8 @@ export function CartContextProvider({ children }: PropsWithChildren) {
       removeItemFromCart,
       updateItemQuantityOnCart,
       addShippingAddress,
-      addPaymentMethod
+      addPaymentMethod,
+      resetItems
     }}>
       {children}
     </CartContext.Provider>
