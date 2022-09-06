@@ -35,7 +35,6 @@ export function Checkout() {
     removeItemFromCart,
     addShippingAddress,
     addPaymentMethod,
-    resetItems
   } = useContext(CartContext)
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -51,10 +50,6 @@ export function Checkout() {
 
   function handlePaymentMethodClick(paymentMethod: PaymentMethod) {
     addPaymentMethod(paymentMethod)
-  }
-
-  function handleResetItems() {
-    resetItems()
   }
 
   return (
@@ -162,7 +157,6 @@ export function Checkout() {
 
           <PlaceOrderButton
             to="/success"
-            onClick={handleResetItems}
           >
             Confirmar pedido
           </PlaceOrderButton>

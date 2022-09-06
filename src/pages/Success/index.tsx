@@ -1,9 +1,9 @@
+import { useContext, useEffect } from 'react'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-import { ContentCard, ContentContainer, MainContainer } from './styles'
-import illustration from '../../assets/images/illustration.png'
 import { Bullet } from '../../components/Bullet'
-import { useContext } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import illustration from '../../assets/images/illustration.png'
+import { ContentCard, ContentContainer, MainContainer } from './styles'
 
 const payment = {
   credit: 'Cartão de Crédito',
@@ -12,7 +12,11 @@ const payment = {
 } as const
 
 export function Success() {
-  const { shippingAddress, paymentMethod } = useContext(CartContext)
+  const { shippingAddress, paymentMethod, resetCart } = useContext(CartContext)
+
+  useEffect(() => {
+    return resetCart
+  }, [])
 
   return (
     <MainContainer>

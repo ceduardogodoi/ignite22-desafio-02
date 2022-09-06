@@ -1,13 +1,6 @@
 import { createContext, useState, PropsWithChildren } from 'react'
 import { Bank, CreditCard, Money } from 'phosphor-react'
-
-export enum Tag {
-  TRADITIONAL = 'Tradicional',
-  ICED = 'Gelado',
-  WITH_MILK = 'Com leite',
-  ALCOHOLIC = 'Alcoólico',
-  ESPECIAL = 'Especial'
-}
+import { coffees, Tag } from '../data'
 
 export interface Item {
   id: number,
@@ -65,7 +58,8 @@ interface CartContextType {
   updateItemQuantityOnCart(itemId: number, newQuantity: number): void,
   addShippingAddress(address: Address): void,
   addPaymentMethod(paymentMethod: PaymentMethod): void,
-  resetItems(): void
+  resetCart(): void,
+  resetPaymentMethod(): void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -114,8 +108,13 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     setPaymentMethod(paymentMethod)
   }
 
-  function resetItems() {
+  function resetCart() {
+    coffees.forEach(coffee => delete coffee.quantity)
     setItems([])
+  }
+
+  function resetPaymentMethod() {
+    setPaymentMethod(undefined)
   }
 
   return (
@@ -131,7 +130,8 @@ export function CartContextProvider({ children }: PropsWithChildren) {
       updateItemQuantityOnCart,
       addShippingAddress,
       addPaymentMethod,
-      resetItems
+      resetCart,
+      resetPaymentMethod
     }}>
       {children}
     </CartContext.Provider>

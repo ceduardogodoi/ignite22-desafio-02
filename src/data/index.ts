@@ -1,4 +1,3 @@
-import { Tag } from '../contexts/CartContext'
 import espresso from '../assets/images/coffe-types/espresso.png'
 import american from '../assets/images/coffe-types/american.png'
 import creamyEspresso from '../assets/images/coffe-types/creamy-espresso.png'
@@ -13,6 +12,14 @@ import hawaiian from '../assets/images/coffe-types/hawaiian.png'
 import arabic from '../assets/images/coffe-types/arabic.png'
 import irish from '../assets/images/coffe-types/irish.png'
 
+export enum Tag {
+  TRADITIONAL = 'Tradicional',
+  ICED = 'Gelado',
+  WITH_MILK = 'Com leite',
+  ALCOHOLIC = 'Alcoólico',
+  ESPECIAL = 'Especial'
+}
+
 interface Coffee {
   id: number,
   price: number,
@@ -20,6 +27,7 @@ interface Coffee {
   description: string,
   tags: Tag[],
   image: string,
+  quantity?: number
 }
 
 export const coffees: Coffee[] = [
